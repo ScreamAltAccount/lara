@@ -31,10 +31,10 @@ struct FontPicker: View {
                     }
                     
                     Button {
-                        applyfont("Comic Sans SFUI", label: "Comic Sans MS")
+                        applyfont("Comic Sans MS", label: "Comic Sans MS")
                     } label: {
                         Text("Comic Sans MS")
-                            .font(viewfont(resource: "Comic Sans SFUI", size: 17))
+                            .font(viewfont(resource: "Comic Sans MS", size: 17))
                     }
 
                     Button {
