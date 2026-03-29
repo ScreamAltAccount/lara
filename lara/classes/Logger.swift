@@ -19,6 +19,9 @@ let globallogger = Logger()
 
 class Logger: ObservableObject {
     @Published var logs: [String] = []
+
+    private var lastMessage: String?
+    private var repeatCount = 0
     private var lastwasdivider = false
     private var pendingdivider = false
     private var stdoutpipe: Pipe?
@@ -97,11 +100,20 @@ class Logger: ObservableObject {
                 self.divider()
                 self.pendingdivider = false
             }
-            
-            if self.lastwasdivider || self.logs.isEmpty {
-                self.logs.append(message)
+
+            if message == self.lastMessage {
+                self.repeatCount += 1
+                if let lastIndex = self.logs.indices.last {
+                    self.logs[lastIndex] = "\(message) (\(self.repeatCount + 1)x)"
+                }
             } else {
-                self.logs[self.logs.count - 1] += "\n" + message
+                self.repeatCount = 0
+                if self.lastwasdivider || self.logs.isEmpty {
+                    self.logs.append(message)
+                } else {
+                    self.logs[self.logs.count - 1] += "\n" + message
+                }
+                self.lastMessage = message
             }
 
             self.lastwasdivider = false
@@ -114,6 +126,8 @@ class Logger: ObservableObject {
     func divider() {
         DispatchQueue.main.async {
             self.lastwasdivider = true
+            self.lastMessage = nil
+            self.repeatCount = 0
         }
     }
     

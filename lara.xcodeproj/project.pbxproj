@@ -38,9 +38,22 @@
 		CC1C8B392F71DF9C00206982 /* lara.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lara.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		CC70C4A12F78D4C10052726B /* Exceptions for "lara" folder in "lara" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = CC1C8B382F71DF9C00206982 /* lara */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		CC1C8B3B2F71DF9C00206982 /* lara */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				CC70C4A12F78D4C10052726B /* Exceptions for "lara" folder in "lara" target */,
+			);
 			path = lara;
 			sourceTree = "<group>";
 		};
@@ -297,7 +310,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = arm64e;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = lara;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -309,6 +322,7 @@
 					"$(SRCROOT)/lara",
 					"$(SRCROOT)/lara/kexploit",
 				);
+				INFOPLIST_FILE = lara/Info.plist;
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIAppFonts = "fonts/Chococooky.ttf fonts/Comic Sans SFUI.ttf fonts/DejaVuSansCondensed.ttf fonts/DejaVuSansMono.ttf fonts/DejaVuSerif.ttf fonts/FiraSans-Regular.ttf fonts/Go-Mono.ttf fonts/Go-Regular.ttf fonts/SFUI.ttf fonts/segoeui.ttf";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -345,7 +359,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = arm64e;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = lara;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -357,6 +371,7 @@
 					"$(SRCROOT)/lara",
 					"$(SRCROOT)/lara/kexploit",
 				);
+				INFOPLIST_FILE = lara/Info.plist;
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIAppFonts = "fonts/Chococooky.ttf fonts/Comic Sans SFUI.ttf fonts/DejaVuSansCondensed.ttf fonts/DejaVuSansMono.ttf fonts/DejaVuSerif.ttf fonts/FiraSans-Regular.ttf fonts/Go-Mono.ttf fonts/Go-Regular.ttf fonts/SFUI.ttf fonts/segoeui.ttf";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
