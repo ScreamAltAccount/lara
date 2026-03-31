@@ -34,12 +34,15 @@ jobs:
 
       - name: handle archival
         id: handle_release
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }} 
         run: |
           LATEST=$(gh release list --limit 1 --json tagName,createdAt | jq -r '.[0].tagName')
           if [ "$LATEST" != "null" ]; then
             SHA=$(gh release view "$LATEST" --json targetCommitish -q '.targetCommitish')
             gh release create "${LATEST}-old" --target "$SHA" --notes "Old release tag"
             gh release delete "$LATEST" --yes
+          fi
 
       - name: new release
         run: |
