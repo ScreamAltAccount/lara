@@ -210,6 +210,10 @@ struct ContentView: View {
                     }
                     
                     Section {
+                        NavigationLink("Tools") {
+                            ToolsView()
+                        }
+                        
                         if #unavailable(iOS 18.2) {
                             Button("Respring") {
                                 mgr.respring()
