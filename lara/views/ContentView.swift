@@ -387,6 +387,8 @@ struct ContentView: View {
                         }
                     } header: {
                         Text("RemoteCall")
+                    } footer: {
+                        Text("Broken. Do not create issues or ask for support regarding this feature.")
                     }
                     
                     Section {
