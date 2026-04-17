@@ -200,6 +200,7 @@ private func loadVarCleanGroups() -> [VarCleanGroup] {
 
     var grouped: [String: [VarCleanMatch]] = [:]
     var seenPaths = Set<String>()
+    var directoryEntriesCache: [String: [String]] = [:]
     let sortedRulePaths = rules.keys.sorted { $0.localizedCaseInsensitiveCompare($1) == .orderedAscending }
 
     for basePath in sortedRulePaths {
@@ -208,10 +209,12 @@ private func loadVarCleanGroups() -> [VarCleanGroup] {
             continue
         }
 
-        for entry in blacklist {
-            guard let name = entry as? String, !name.isEmpty else { continue }
-            let probePath = (basePath as NSString).appendingPathComponent(name)
-            guard seenPaths.insert(probePath).inserted else { continue }
+        for probePath in probePaths(
+            for: basePath,
+            blacklist: blacklist,
+            seenPaths: &seenPaths,
+            directoryEntriesCache: &directoryEntriesCache
+        ) {
             var isDirectory = ObjCBool(false)
             var isSymlink = ObjCBool(false)
             guard VarCleanBridge.probePathExists(probePath, isDirectory: &isDirectory, isSymlink: &isSymlink) else {
@@ -239,4 +242,51 @@ private func loadVarCleanGroups() -> [VarCleanGroup] {
             .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
         return VarCleanGroup(path: groupPath, items: items)
     }
+}
+
+private func probePaths(
+    for basePath: String,
+    blacklist: [Any],
+    seenPaths: inout Set<String>,
+    directoryEntriesCache: inout [String: [String]]
+) -> [String] {
+    var probePaths: [String] = []
+
+    for entry in blacklist {
+        if let name = entry as? String, !name.isEmpty {
+            let probePath = (basePath as NSString).appendingPathComponent(name)
+            if seenPaths.insert(probePath).inserted {
+                probePaths.append(probePath)
+            }
+            continue
+        }
+
+        guard let condition = entry as? [String: Any],
+              let match = condition["match"] as? String,
+              match == "regexp",
+              let pattern = condition["name"] as? String,
+              let regex = try? NSRegularExpression(pattern: pattern) else {
+            continue
+        }
+
+        let entries = directoryEntries(atPath: basePath, cache: &directoryEntriesCache)
+        for name in entries where regex.firstMatch(in: name, range: NSRange(name.startIndex..., in: name)) != nil {
+            let probePath = (basePath as NSString).appendingPathComponent(name)
+            if seenPaths.insert(probePath).inserted {
+                probePaths.append(probePath)
+            }
+        }
+    }
+
+    return probePaths
+}
+
+private func directoryEntries(atPath path: String, cache: inout [String: [String]]) -> [String] {
+    if let cached = cache[path] {
+        return cached
+    }
+
+    let entries = (try? FileManager.default.contentsOfDirectory(atPath: path)) ?? []
+    cache[path] = entries
+    return entries
 }

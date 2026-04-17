@@ -10,10 +10,6 @@
   "/var/mobile/Library/SplashBoard/Snapshots": {
     "blacklist": [
       "com.roothide.manager",
-      {
-        "match": "regexp",
-        "name": "^com\\.m1337\\."
-      },
       "com.opa334.Dopamine.roothide",
       "com.opa334.Dopamine",
       {
@@ -62,10 +58,6 @@
   },
   "/var/mobile/Library/Preferences": {
     "blacklist": [
-      {
-        "match": "regexp",
-        "name": "^com\\.m1337\\."
-      },
       "com.roothide.manager.plist",
       "com.opa334.Dopamine.roothide.plist",
       "com.opa334.Dopamine.plist",
@@ -93,10 +85,6 @@
       {
         "match": "regexp",
         "name": "^com\\.tigisoftware\\."
-      },
-      {
-        "match": "regexp",
-        "name": "^com\\.m1337\\."
       },
       "org.coolstar.SileoStore",
       "ws.hbang.Terminal",
@@ -233,10 +221,6 @@
   },
   "/var/mobile/Library/HTTPStorages": {
     "blacklist": [
-      {
-        "match": "regexp",
-        "name": "^com\\.m1337\\."
-      },
       "com.opa334.Dopamine",
       {
         "match": "regexp",
