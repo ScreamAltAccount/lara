@@ -121,7 +121,7 @@ struct DarkBoardView: View {
     @ViewBuilder
     private func iconView(for app: AppInfo) -> some View {
         if let icon = iconCache[app.bundlePath] {
-            Image(uiImage: icon).resizable().frame(width: 40, height: 40).clipShape(RoundedRectangle(cornerRadius: 6))
+            Image(uiImage: icon).resizable().frame(width: 40, height: 40).clipShape(RoundedRectangle(cornerRadius: 9))
         } else {
             RoundedRectangle(cornerRadius: 6).fill(Color.gray.opacity(0.3)).frame(width: 40, height: 40)
                 .overlay(Image(systemName: "app.fill").foregroundColor(.secondary))
