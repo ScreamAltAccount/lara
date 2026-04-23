@@ -343,7 +343,7 @@ struct ThemePickerSheet: View {
                         }
                         Spacer()
                         if let img = previewImage {
-                            Image(uiImage: img).resizable().frame(width: 60, height: 60).clipShape(RoundedRectangle(cornerRadius: 10))
+                            Image(uiImage: img).resizable().frame(width: 60, height: 60).clipShape(RoundedRectangle(cornerRadius: 13))
                         }
                     }
                 }
